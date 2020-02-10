@@ -1,13 +1,6 @@
 node{
     stage("git"){
-        sh 'git rev-parse --is-inside-work-tree # timeout=10'
-    	sh 'git config remote.origin.url https://github.com/TestHanlonglin/GradleJavaTestProject.git # timeout=10'
-    	sh 'git --version # timeout=10'
-    	sh 'git fetch --tags --progress -- https://github.com/TestHanlonglin/GradleJavaTestProject.git +refs/heads/*:refs/remotes/origin/* # timeout=10'
-    	sh 'git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10'
-    	sh 'git config core.sparsecheckout # timeout=10'
-    	sh 'git checkout -f f78cd33ceafeafcf654966a60e6655dc19ca5447 # timeout=10'
-    	sh 'git rev-list --no-walk f78cd33ceafeafcf654966a60e6655dc19ca5447 # timeout=10'
+    	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/TestHanlonglin/GradleJavaTestProject.git']]])
     }
     stage("build"){
         sh 'gradle clean build'
