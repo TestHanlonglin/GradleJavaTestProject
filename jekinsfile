@@ -1,0 +1,11 @@
+node{
+    stage("setup"){
+        println 'do setup'
+    }
+    stage("test"){
+        println 'do test'
+    }
+    stage("build"){
+        println 'do build'
+    }
+}
